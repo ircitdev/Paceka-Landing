@@ -37,7 +37,7 @@ export const OrderForm = () => {
     setSubmitStatus('idle')
 
     try {
-      // Telegram Bot credentials
+      // Telegram Bot credentials (будут использоваться через CORS proxy)
       const botToken = '8651732113:AAF6DQioU4mgf7XAukDqATGzNrwk1UuIgo0'
       const chatId = '1021916107'
 
@@ -52,10 +52,11 @@ export const OrderForm = () => {
 🕐 Дата: ${new Date().toLocaleString('ru-RU')}
 🌐 Сайт: dev.uspeshnyy.ru/www/paceka/`
 
-      // Send to Telegram
+      // Use CORS proxy to avoid CORS issues
       const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`
+      const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(telegramUrl)}`
 
-      const response = await fetch(telegramUrl, {
+      const response = await fetch(proxyUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -63,7 +64,6 @@ export const OrderForm = () => {
         body: JSON.stringify({
           chat_id: chatId,
           text: message,
-          parse_mode: 'HTML',
         }),
       })
 
