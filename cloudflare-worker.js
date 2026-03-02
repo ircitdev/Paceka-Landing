@@ -39,16 +39,46 @@ export default {
       const BOT_TOKEN = '8651732113:AAF6DQioU4mgf7XAukDqATGzNrwk1UuIgo0'
       const CHAT_ID = '1021916107'
 
+      // UTM parameters
+      const utmSource = data.utmSource || '-'
+      const utmMedium = data.utmMedium || '-'
+      const utmCampaign = data.utmCampaign || '-'
+      const utmContent = data.utmContent || '-'
+      const utmTerm = data.utmTerm || '-'
+
+      // Device info
+      const deviceType = data.deviceType || 'Unknown'
+      const os = data.os || 'Unknown'
+      const browser = data.browser || 'Unknown'
+      const screenRes = data.screenRes || 'Unknown'
+
       // Format message
-      const message = `🆕 Новая заявка с лендинга!
+      const message = `🆕 <b>Новая заявка с лендинга!</b>
 
-👤 Имя: ${data.name}
-📱 Телефон: ${data.phone}
-📧 Email: ${data.email}
-💬 Комментарий: ${data.comment || 'Не указан'}
+👤 <b>Имя:</b> ${data.name}
+📱 <b>Телефон:</b> ${data.phone}
+📧 <b>Email:</b> ${data.email}
+💬 <b>Комментарий:</b> ${data.comment || 'Не указан'}
 
-🕐 Дата: ${new Date().toLocaleString('ru-RU')}
-🌐 Сайт: dev.uspeshnyy.ru/www/paceka/`
+━━━━━━━━━━━━━━━━━━━━━━
+📊 <b>UTM метки</b>
+━━━━━━━━━━━━━━━━━━━━━━
+🎯 <b>Source:</b> ${utmSource}
+📢 <b>Medium:</b> ${utmMedium}
+🎪 <b>Campaign:</b> ${utmCampaign}
+📝 <b>Content:</b> ${utmContent}
+🔍 <b>Term:</b> ${utmTerm}
+
+━━━━━━━━━━━━━━━━━━━━━━
+💻 <b>Устройство</b>
+━━━━━━━━━━━━━━━━━━━━━━
+📱 <b>Тип:</b> ${deviceType}
+🖥 <b>ОС:</b> ${os}
+🌐 <b>Браузер:</b> ${browser}
+📐 <b>Разрешение:</b> ${screenRes}
+
+🕐 <b>Дата:</b> ${new Date().toLocaleString('ru-RU')}
+🌐 <b>Сайт:</b> dev.uspeshnyy.ru/www/paceka/`
 
       // Send to Telegram
       const telegramUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`
@@ -61,6 +91,7 @@ export default {
         body: JSON.stringify({
           chat_id: CHAT_ID,
           text: message,
+          parse_mode: 'HTML',
         }),
       })
 

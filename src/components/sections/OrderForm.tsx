@@ -41,16 +41,68 @@ export const OrderForm = () => {
       const botToken = '8651732113:AAF6DQioU4mgf7XAukDqATGzNrwk1UuIgo0'
       const chatId = '1021916107'
 
+      // Get UTM parameters
+      const urlParams = new URLSearchParams(window.location.search)
+      const utmSource = urlParams.get('utm_source') || '-'
+      const utmMedium = urlParams.get('utm_medium') || '-'
+      const utmCampaign = urlParams.get('utm_campaign') || '-'
+      const utmContent = urlParams.get('utm_content') || '-'
+      const utmTerm = urlParams.get('utm_term') || '-'
+
+      // Get device info
+      const ua = navigator.userAgent
+      let deviceType = 'Desktop'
+      let os = 'Unknown'
+      let browser = 'Unknown'
+
+      // Detect device type
+      if (/mobile/i.test(ua)) deviceType = 'Mobile'
+      else if (/tablet|ipad/i.test(ua)) deviceType = 'Tablet'
+
+      // Detect OS
+      if (/windows/i.test(ua)) os = 'Windows'
+      else if (/macintosh|mac os x/i.test(ua)) os = 'macOS'
+      else if (/linux/i.test(ua)) os = 'Linux'
+      else if (/android/i.test(ua)) os = 'Android'
+      else if (/iphone|ipad|ipod/i.test(ua)) os = 'iOS'
+
+      // Detect browser
+      if (/chrome/i.test(ua) && !/edg/i.test(ua)) browser = 'Chrome'
+      else if (/safari/i.test(ua) && !/chrome/i.test(ua)) browser = 'Safari'
+      else if (/firefox/i.test(ua)) browser = 'Firefox'
+      else if (/edg/i.test(ua)) browser = 'Edge'
+      else if (/opera|opr/i.test(ua)) browser = 'Opera'
+
+      // Get screen resolution
+      const screenRes = `${window.screen.width}x${window.screen.height}`
+
       // Format message
-      const message = `🆕 Новая заявка с лендинга!
+      const message = `🆕 <b>Новая заявка с лендинга!</b>
 
-👤 Имя: ${data.name}
-📱 Телефон: ${data.phone}
-📧 Email: ${data.email}
-💬 Комментарий: ${data.comment || 'Не указан'}
+👤 <b>Имя:</b> ${data.name}
+📱 <b>Телефон:</b> ${data.phone}
+📧 <b>Email:</b> ${data.email}
+💬 <b>Комментарий:</b> ${data.comment || 'Не указан'}
 
-🕐 Дата: ${new Date().toLocaleString('ru-RU')}
-🌐 Сайт: dev.uspeshnyy.ru/www/paceka/`
+━━━━━━━━━━━━━━━━━━━━━━
+📊 <b>UTM метки</b>
+━━━━━━━━━━━━━━━━━━━━━━
+🎯 <b>Source:</b> ${utmSource}
+📢 <b>Medium:</b> ${utmMedium}
+🎪 <b>Campaign:</b> ${utmCampaign}
+📝 <b>Content:</b> ${utmContent}
+🔍 <b>Term:</b> ${utmTerm}
+
+━━━━━━━━━━━━━━━━━━━━━━
+💻 <b>Устройство</b>
+━━━━━━━━━━━━━━━━━━━━━━
+📱 <b>Тип:</b> ${deviceType}
+🖥 <b>ОС:</b> ${os}
+🌐 <b>Браузер:</b> ${browser}
+📐 <b>Разрешение:</b> ${screenRes}
+
+🕐 <b>Дата:</b> ${new Date().toLocaleString('ru-RU')}
+🌐 <b>Сайт:</b> dev.uspeshnyy.ru/www/paceka/`
 
       // Use CORS proxy to avoid CORS issues
       const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`
@@ -64,6 +116,7 @@ export const OrderForm = () => {
         body: JSON.stringify({
           chat_id: chatId,
           text: message,
+          parse_mode: 'HTML',
         }),
       })
 
