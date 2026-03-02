@@ -39,7 +39,7 @@ export const OrderForm = () => {
     try {
       const apiUrl = import.meta.env.DEV
         ? 'http://localhost:3002/api/submit-order'
-        : '/api/submit-order'
+        : './api/submit-order.php'
 
       const response = await fetch(apiUrl, {
         method: 'POST',
