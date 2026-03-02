@@ -37,26 +37,39 @@ export const OrderForm = () => {
     setSubmitStatus('idle')
 
     try {
-      const apiUrl = import.meta.env.DEV
-        ? 'http://localhost:3002/api/submit-order'
-        : './api/submit-order.php'
+      // Telegram Bot credentials
+      const botToken = '8651732113:AAF6DQioU4mgf7XAukDqATGzNrwk1UuIgo0'
+      const chatId = '1021916107'
 
-      const response = await fetch(apiUrl, {
+      // Format message
+      const message = `🆕 Новая заявка с лендинга!
+
+👤 Имя: ${data.name}
+📱 Телефон: ${data.phone}
+📧 Email: ${data.email}
+💬 Комментарий: ${data.comment || 'Не указан'}
+
+🕐 Дата: ${new Date().toLocaleString('ru-RU')}
+🌐 Сайт: dev.uspeshnyy.ru/www/paceka/`
+
+      // Send to Telegram
+      const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`
+
+      const response = await fetch(telegramUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: data.name,
-          phone: data.phone,
-          email: data.email,
-          comment: data.comment,
+          chat_id: chatId,
+          text: message,
+          parse_mode: 'HTML',
         }),
       })
 
       const result = await response.json()
 
-      if (response.ok && result.success) {
+      if (response.ok && result.ok) {
         setSubmitStatus('success')
         reset()
         // Hide success message after 5 seconds
