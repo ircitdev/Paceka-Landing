@@ -1,6 +1,11 @@
-# 🐝 Умные весы для пасеки - Landing Page
+# 🐝 Умные весы для пасеки - 3D Landing Page
 
-Красивый 3D лендинг с анимированной сценой (улей, пчелы, листики, облака) и scroll-driven камерой для продажи системы умных весов для пасеки.
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev/)
+[![Three.js](https://img.shields.io/badge/Three.js-Latest-000000?logo=three.js&logoColor=white)](https://threejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-6.x-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+
+> Современный 3D лендинг для системы автоматического мониторинга пасеки с впечатляющими анимациями и scroll-driven эффектами камеры.
 
 ## ✨ Особенности
 
@@ -158,8 +163,28 @@ vercel --prod
 
 ## 📄 Лицензия
 
-MIT
+Распространяется под лицензией MIT.
 
-## 👨‍💻 Разработка
+## 👤 Автор
 
-Разработано с использованием Claude Code и современного стека технологий.
+**ircitdev**
+
+- GitHub: [@ircitdev](https://github.com/ircitdev)
+- Website: https://dev.uspeshnyy.ru
+
+## 🙏 Благодарности
+
+- [Three.js](https://threejs.org/) - за потрясающий 3D движок
+- [React Three Fiber](https://docs.pmnd.rs/react-three-fiber) - за React интеграцию
+- [Tailwind CSS](https://tailwindcss.com/) - за утилитарные стили
+- [Framer Motion](https://www.framer.com/motion/) - за плавные анимации
+
+---
+
+<div align="center">
+
+**Создано с ❤️ для пчеловодов**
+
+[Live Demo](https://dev.uspeshnyy.ru/www/paceka/) · [Сообщить об ошибке](https://github.com/ircitdev/Paceka-Landing/issues) · [Предложить функцию](https://github.com/ircitdev/Paceka-Landing/issues)
+
+</div>
